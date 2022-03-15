@@ -27,4 +27,5 @@ public:
    void operator =(const Queue &original);
 protected:
    Node *front, *rear;
+   int count;
 };

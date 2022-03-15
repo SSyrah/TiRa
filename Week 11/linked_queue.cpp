@@ -18,6 +18,7 @@ Post: The Queue is initialized to be empty.
 */
 {
    front = rear = NULL;
+   count = 0;
 }
 
 Error_code Queue::append(const Queue_entry &item)
@@ -33,6 +34,7 @@ Post: Add item to the rear of the Queue and return a code of success
       rear->next = new_rear;
       rear = new_rear;
    }
+   count++;
    return success;
 }
 
@@ -47,6 +49,7 @@ Post: The front of the Queue is removed.  If the Queue
    front = old_front->next;
    if (front == NULL) rear = NULL;
    delete old_front;
+   count--;
    return success;
 }
 
