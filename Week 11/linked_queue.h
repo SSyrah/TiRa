@@ -2,6 +2,7 @@
 #include "header.h"
 
 typedef int Node_entry;
+typedef int Queue_entry;
 
 struct Node {
 //  data members

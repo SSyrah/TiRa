@@ -50,3 +50,58 @@ Post: The front of the Queue is removed.  If the Queue
    return success;
 }
 
+bool Queue::empty() const 
+{
+   if (rear == NULL && front == NULL)
+   return true;
+   return false;
+}
+
+Error_code Queue::retrieve(Queue_entry &item) const {
+
+   if (front == NULL) return underflow;
+   else {
+      item = front->entry;
+   }
+   return success;
+}
+
+Queue::~Queue(){
+   Node* current = front;
+   Node* next;
+   while (current != NULL){
+      next = current->next;
+      delete current;
+      current = next;
+   }
+}
+
+Queue::Queue(const Queue& original){
+   Node* new_copy, *original_copy = original.front;
+   if (original_copy == NULL) front = NULL;
+   else{
+      front = new_copy = new Node(original_copy->entry);
+      while (original_copy->next != NULL){
+         original_copy = original_copy->next;
+         new_copy->next = new Node(original_copy->entry);
+         new_copy = new_copy->next;
+      }
+   }
+}
+
+void Queue::operator =(const Queue &original){
+   Node* new_front, *new_copy, *original_copy = original.front;
+   if (original_copy == NULL) new_front == NULL;
+   else {
+      new_copy = new_front = new Node(original_copy->entry);
+      while (original_copy->next != NULL){
+         original_copy = original_copy->next;
+         new_copy->next = new Node(original_copy->entry);
+         new_copy = new_copy->next;
+      }
+   }
+   while (!empty()){
+      serve();
+   }
+   front = new_front;
+}
