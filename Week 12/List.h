@@ -27,7 +27,13 @@ protected:
 };
 
 
- 
+ template<class List_entry>
+ List<List_entry>::List(){
+     count = 0;
+     for (int i = 0; i<max_list; i++)
+        entry[i] = nullptr;
+ }
+
 template <class List_entry>
 int List<List_entry>::size() const
 /*
@@ -50,7 +56,7 @@ bool List<List_entry>::empty()const {
 template<class List_entry>
 void List<List_entry>::clear() {
     for (int i = 0; i<max_list; i++)
-    entry[i] = NULL;
+    entry[i] = nullptr;
 }
 
 template<class List_entry>
@@ -114,10 +120,5 @@ Post: The action specified by function (*visit) has been performed on every
    for (int i = 0; i < count; i++)
       (*visit)(entry[i]);
 }
-
-
-
-
-
 
 #endif
