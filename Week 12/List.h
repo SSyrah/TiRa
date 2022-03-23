@@ -82,6 +82,7 @@ template<class List_entry>
 void List<List_entry>::clear() {
     for (int i = 0; i<max_list; i++)
         entry[i] = NULL;
+        count = 0;
 }
 
 template<class List_entry>
@@ -108,9 +109,10 @@ Error_code List<List_entry>::remove(int position, List_entry &x){
         return utility_range_error;
 
     x = entry[position];
-    for (int i = count; i>=position; i--){
-        entry[i-1] = entry[i];
+    for (int i = position; i<=count; i++){
+        entry[i] = entry[i+1];
     }
+    std::cout << "Count value: " << count << std::endl;
     count--;
     return success;
 }
@@ -163,12 +165,7 @@ Error_code insert_first(const List_entry &x, List &a_list){
 template<class List_entry, class List>
 Error_code remove_first(List_entry &x, List &a_list){
 
-    if (a_list.empty()) return underflow;
-    x = a_list.entry[0];
-    for (int i = a_list.count; i>=0; i--)
-        a_list.entry[i-1] = a_list.entry[i];
-
-    a_list.count--;
+    a_list.remove(0 , x);
     return success;
 }
 //E3
@@ -184,11 +181,8 @@ Error_code insert_last(const List_entry &x, List &a_list){
 //E4
 template<class List_entry, class List>
 Error_code remove_last(List_entry &x, List &a_list){
-    if (a_list.empty()) return underflow;
-    x = a_list.entry[a_list.count];
-    a_list.entry[a_list.count-1] = a_list.entry[a_list.count];
-    a_list.entry[a_list.count] = NULL;
-    a_list.count--;
+   
+    a_list.remove(a_list.size(), x);
     return success;
 }
 
@@ -197,13 +191,13 @@ template<class List_entry,class List>
 Error_code median_list(List_entry &x, List &a_list) {
     int median = 0;
     if (a_list.empty()) return underflow;
-    if (a_list.count % 2 == 0){
-        median = a_list.count / 2 - 1;
+    if (a_list.size() % 2 == 0){
+        median = a_list.size() / 2 - 1;
     }
     else{
-        median = a_list.count / 2;
+        median = a_list.size() / 2;
     }
-    x = a_list[median];
+    x = a_list.entry[median];
     return success;
 }
 

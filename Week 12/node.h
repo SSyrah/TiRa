@@ -15,7 +15,7 @@ struct Node {
 template<class Node_entry>
 Node<Node_entry>::Node()
 {
-    entry = nullptr;
+    entry = NULL;
 }
 
 template<class Node_entry>
