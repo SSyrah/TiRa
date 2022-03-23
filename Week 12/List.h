@@ -56,7 +56,7 @@ template<class List_entry>
 List<List_entry>::List(){
     count = 0;
     for (int i = 0; i<max_list; i++)
-        entry[i] = nullptr;
+        entry[i] = NULL;
 }
 
 template <class List_entry>
@@ -81,7 +81,7 @@ bool List<List_entry>::empty()const {
 template<class List_entry>
 void List<List_entry>::clear() {
     for (int i = 0; i<max_list; i++)
-        entry[i] = nullptr;
+        entry[i] = NULL;
 }
 
 template<class List_entry>
@@ -106,6 +106,7 @@ Error_code List<List_entry>::remove(int position, List_entry &x){
         return underflow;
     if (position < 0 || position > count)
         return utility_range_error;
+
     x = entry[position];
     for (int i = count; i>=position; i--){
         entry[i-1] = entry[i];
@@ -186,7 +187,7 @@ Error_code remove_last(List_entry &x, List &a_list){
     if (a_list.empty()) return underflow;
     x = a_list.entry[a_list.count];
     a_list.entry[a_list.count-1] = a_list.entry[a_list.count];
-    a_list.entry[a_list.count] = nullptr;
+    a_list.entry[a_list.count] = NULL;
     a_list.count--;
     return success;
 }
