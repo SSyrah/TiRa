@@ -1,6 +1,5 @@
 #pragma once
-
-#include "utility.h"
+#include "Utility.h"
 
 const int max_list = 5000;   
  
@@ -368,7 +367,7 @@ fills before the copy is complete.
 }
 void write_entry(char &c)
 {
-   cout << c << " ";
+   std::cout << c << " ";
 }
 
 void insert_1_to_entry(char &c)
@@ -430,11 +429,11 @@ before the copying is complete.
 template <class List_entry> 
 void printList( const char *text_p , List<List_entry> &list )
 {
-	cout << text_p << endl;
+	std::cout << text_p << std::endl;
 	if ( list.size() > 0 ) {
 		list.traverse( write_entry );
-		cout << endl;
+		std::cout << std::endl;
 	}
 	else
-		cout << "Tyhja." << endl;
+		std::cout << "Tyhja." << std::endl;
 }

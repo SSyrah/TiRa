@@ -24,6 +24,7 @@ public:
    Error_code insert(int position, const List_entry &x);
    Error_code replace(int position, const List_entry &x);
    Error_code retrieve(int position, List_entry &x);
+   void clear();
    bool empty() const;
    bool full() const;
    int size() const;
@@ -48,7 +49,7 @@ Node<Node_entry>::Node()
 }
 
 template<typename Node_entry>
-Node<Node_entry>::Node(Node_entry data, Node<Node_entry> *link = nullptr)
+Node<Node_entry>::Node(Node_entry data, Node<Node_entry> *link)
 {
     entry = data;
     next = link;
@@ -70,8 +71,10 @@ List<List_entry>::List(const List<List_entry> &copy)
 template<typename List_entry>
 List<List_entry>::~List()
 {
-    delete List;
-    entry = NULL;
+    for (int i = 0; i < count; i++){
+      head = set_position(i);
+      head = nullptr;
+    }
 }
 
 //--------------------------------------------------
@@ -102,7 +105,7 @@ Post: If the List is not full and 0 <= position <= n,
 */
 {
    if (position < 0 || position > count)
-      return range_error;
+      return utility_range_error;
    Node<List_entry> *new_node, *previous, *following;
    if (position > 0) {
       previous = set_position(position - 1);
@@ -155,12 +158,20 @@ Error_code List<List_entry>::replace(int pos, const List_entry &x)
 
 template<typename List_entry>
 Error_code List<List_entry>::retrieve(int pos, List_entry &x)
-{
+{  
+    if (empty()) return underflow;
     if (pos < 0 || pos > count) return utility_range_error;
-    Node<List> *new_node = set_position(pos);
+    Node<List_entry> *new_node = set_position(pos);
     x = new_node->entry;
     return success;
 }
 
-
-
+template<typename List_entry>
+void List<List_entry>::clear()
+{
+   for (int i = 0; i < count; i++){
+      head = set_position(i);
+      head = nullptr;
+      count--;
+   }
+}
