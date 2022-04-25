@@ -2,7 +2,7 @@
 
 #include "utility.h"
 
-const int max_list = 500;
+const int max_list = 5000;
  
 template <class List_entry>
 class List {
@@ -18,12 +18,17 @@ public:
    Error_code replace(int position, const List_entry &x);
    Error_code remove(int position, List_entry &x);
    Error_code insert(int position, const List_entry &x);
+   int getMaxSize();
 
 protected:
 //  data members for a contiguous list implementation
    int count;
    List_entry entry[max_list];
 };
+
+template <typename List_entry>
+Error_code copy(List<List_entry> &dest, const List<List_entry> &source);
+
 
 template <typename List_entry>
 List<List_entry>::List()
@@ -143,7 +148,7 @@ Post: If the List is not full and 0 <= position < n,
 where n is the number of entries in the List,
 the function succeeds:
 The entry in position is copied to x.
-Otherwise the function fails with an error code of range_error.
+Otherwise, the function fails with an error code of range_error.
  
 */
 
@@ -162,7 +167,7 @@ where n is the number of entries in the List,
 the function succeeds:
 The entry in position is replaced by x,
 all other entries remain unchanged.
-Otherwise the function fails with an error code of range_error.
+Otherwise, the function fails with an error code of range_error.
  
 */
 
@@ -182,7 +187,7 @@ from the List, and the entries in all later positions
 have their position numbers decreased by 1.
 The parameter x records a copy of
 the entry formerly in position.
-Otherwise the function fails with a diagnostic error code.
+Otherwise, the function fails with a diagnostic error code.
  
 */
 
@@ -199,6 +204,11 @@ Error_code List<List_entry>::remove(int position, List_entry &x)
       position++;
    }
    return success;
+}
+
+template<class List_entry>
+int List<List_entry>::getMaxSize() {
+    return max_list;
 }
 
 template <typename List_entry> 

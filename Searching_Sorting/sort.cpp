@@ -48,13 +48,13 @@ bool operator != (const Key &x, const Key &y)
 
 void initialize(int& target) {
     bool check = true;
-    std::cout << "Welcome to use searching and sorting - app!\n"
+    std::cout << "\nWelcome to use searching and sorting - app!\n"
               << "Choose on of following options:\n"
               << "[1] Sequential search\n"
-              << "[2] ---- \n"
-              << "[3] ---- \n"
-              << "[4] ---- \n"
-              << "[5] ---- \n"
+              << "[2] Sequential search vs Binary Search comparison \n"
+              << "[3] Insertion sort algorithm \n"
+              << "[4] Selection sort algorithm \n"
+              << "[5] Performance test with 3 sorting algorithms \n"
               << "[6] Quit program \n"
               << "Your option: ";
     std::cin >> target;

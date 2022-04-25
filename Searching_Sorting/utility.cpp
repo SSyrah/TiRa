@@ -1,6 +1,5 @@
 #include <iostream> 
-using namespace std; 
-
+using namespace std;
 #include "utility.h"
 
 const char *error_messages[] = { "success", "fail", "utility_range_error", "underflow", "overflow", "fatal", "not_present", 
